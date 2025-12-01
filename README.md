@@ -2,8 +2,6 @@
 
 <div align="center">
 
-![Atom Playbook](Images/playbook.png)
-
 **Windows Customization Playbook for Power Users**
 
 [![Version](https://img.shields.io/badge/version-0.4-blue.svg)](https://github.com/projectatom1/Atom-Playbook/releases)
