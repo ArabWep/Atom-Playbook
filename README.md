@@ -269,25 +269,7 @@ cd Atom-Playbook
 
 ## 📝 Changelog
 
-### Version 0.4 (Current)
-- ✨ Fixed theme application method
-- 🎨 Improved theme pack integration with proper API calls
-- 🔧 Enhanced error handling and validation
-- 📚 Updated documentation and compliance
-- 🛡️ Added educational disclaimers
-
-### Version 0.3
-- 🆕 Added theme selection feature
-- 🔄 Replaced simple wallpaper with full theme pack
-- 🐛 Fixed option name consistency issues
-- ⚡ Performance improvements
-
-### Version 0.2
-- 🎨 Initial theme support
-- 🔧 Registry optimizations
-- 📦 Expanded bloatware removal list
-
-### Version 0.1
+### Version 0.1 (Current)
 - 🎉 Initial release
 - 🛡️ Basic privacy controls
 - 🚀 Core performance optimizations
