@@ -4,7 +4,7 @@
 
 **Windows Customization Playbook for Power Users**
 
-[![Version](https://img.shields.io/badge/version-0.4-blue.svg)](https://github.com/projectatom1/Atom-Playbook/releases)
+[![Version](https://img.shields.io/badge/version-0.1-blue.svg)](https://github.com/projectatom1/Atom-Playbook/releases)
 [![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D6?logo=windows)](https://github.com/projectatom1/Atom-Playbook)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![AME Wizard](https://img.shields.io/badge/AME%20Wizard-Compatible-orange.svg)](https://ameliorated.io)
