@@ -131,12 +131,12 @@ Before proceeding, ensure you have:
 
 ### Step 2: Download Atom Playbook
 1. Go to [Releases](https://github.com/projectatom1/Atom-Playbook/releases)
-2. Download `AtomPlaybook_01.apbx`
+2. Download `AtomPlaybook_0.1.apbx`
 3. Verify file integrity (checksums provided in release)
 
 ### Step 3: Run the Playbook
 1. Open **AME Wizard**
-2. Drag and drop `AtomPlaybookBeta.apbx` into AME Wizard
+2. Drag and drop `AtomPlaybook_0.1.apbx` into AME Wizard
 3. **Carefully review** all available options
 4. Select your preferences:
    - Choose your browser (Brave, Zen, Chrome, or None)
