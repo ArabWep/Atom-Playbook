@@ -131,7 +131,7 @@ Before proceeding, ensure you have:
 
 ### Step 2: Download Atom Playbook
 1. Go to [Releases](https://github.com/projectatom1/Atom-Playbook/releases)
-2. Download `AtomPlaybookBeta.apbx`
+2. Download `AtomPlaybook_01.apbx`
 3. Verify file integrity (checksums provided in release)
 
 ### Step 3: Run the Playbook
