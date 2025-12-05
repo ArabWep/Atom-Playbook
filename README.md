@@ -249,7 +249,7 @@ We welcome contributions from the community! Here's how you can help:
 
 ### Development Setup
 ```bash
-git clone https://github.com/projectatom1/Atom-Playbook.git
+git clone https://github.com/ArabWep/Atom-Playbook.git
 cd Atom-Playbook
 
 # Review YAML files in Configuration/tasks/
