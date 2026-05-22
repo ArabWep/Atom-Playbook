@@ -1,8 +1,6 @@
-# 🚀 Atom Playbook
+# Atom Playbook
 
-<div align="center">
-
-**Windows Customization Playbook for Power Users**
+**Windows customization playbook for advanced users, built on the AME Wizard framework.**
 
 [![Version](https://img.shields.io/badge/version-0.1-blue.svg)](https://github.com/projectatom1/Atom-Playbook/releases)
 [![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D6?logo=windows)](https://github.com/projectatom1/Atom-Playbook)
@@ -11,13 +9,11 @@
 
 [Download](https://github.com/projectatom1/Atom-Playbook/releases) • [Documentation](https://www.atom-os.com/docs) • [Website](https://www.atom-os.com/) • [Report Bug](https://github.com/projectatom1/Atom-Playbook/issues)
 
-</div>
-
 ---
 
-## ⚠️ Important Notice
+## Important Notice
 
-**This project is intended for educational and research purposes.** It demonstrates Windows customization techniques using the AME Wizard framework. Users should understand the implications of system modifications and use this software responsibly.
+This project is intended for **educational and research purposes**. It demonstrates Windows customization techniques using the AME Wizard framework. Users must understand the implications of system modifications and use this software responsibly.
 
 **Not recommended for:**
 - Production or work environments
@@ -32,97 +28,98 @@
 
 ---
 
-## 📖 What is Atom Playbook?
+## Overview
 
-**Atom Playbook** is an advanced Windows customization playbook designed for the [AME Wizard](https://ameliorated.io) framework. It provides power users with granular control over their Windows installation, allowing for deep personalization and optimization.
+**Atom Playbook** is an advanced Windows customization playbook designed for the [AME Wizard](https://ameliorated.io) framework. It provides power users with granular control over their Windows installation, enabling deep personalization and optimization.
 
-### Key Features:
-- 🎨 **Deep Customization** - Modify Windows behavior and appearance
-- � **Granular Control** - Choose exactly what changes to apply
-- 📊 **Performance Tuning** - Optimize system resources
-- 🎯 **Privacy Options** - Configure telemetry and tracking settings
-- 🖼️ **Custom Theming** - Apply exclusive Atom visual theme
-- � **Fully Documented** - All changes are transparent and logged
+### Key Features
+- **Deep customization** – Modify Windows behavior and appearance
+- **Granular control** – Choose exactly which changes to apply
+- **Performance tuning** – Optimize system resources
+- **Privacy options** – Configure telemetry and tracking settings
+- **Custom theming** – Apply the exclusive Atom visual theme
+- **Fully documented** – All changes are transparent and logged
 
 ---
 
-## ✨ Features
+## Features
 
-### 🎨 Visual Customization
-- 🖼️ Custom Atom theme with wallpaper and color scheme
-- 🎨 Streamlined taskbar and Start Menu
-- 📂 Enhanced File Explorer settings
-- 🚫 Remove pre-installed apps and bloatware
+### Visual Customization
+- Custom Atom theme with wallpaper and color scheme
+- Streamlined taskbar and Start Menu
+- Enhanced File Explorer settings
+- Removal of pre-installed apps and bloatware
 
-### ⚡ System Optimization
-- 🗑️ Remove unnecessary UWP apps (40+ apps)
-- 🔧 Configure Windows services
-- 💾 Optimize storage settings
-- 📊 Reduce background processes
-- 🚀 Improve boot performance
+### System Optimization
+- Removal of unnecessary UWP apps (40+ applications)
+- Configuration of Windows services
+- Storage optimization
+- Reduction of background processes
+- Boot performance improvements
 
-### 🔒 Privacy Configuration
-- 🔐 Telemetry settings control
-- 🚫 Web search integration options
-- 🛑 Advertising preferences
-- 📍 Location and tracking settings
-- ☁️ Cloud sync configuration
+### Privacy Configuration
+- Telemetry settings control
+- Web search integration options
+- Advertising preferences
+- Location and tracking settings
+- Cloud sync configuration
 
-### 🌐 Application Management
-- � Browser selection (Brave, Zen, Chrome)
-- 🗑️ Internet Explorer removal (legacy)
-- ☁️ OneDrive configuration (with data preservation)
-- 🎯 Custom application preferences
+### Application Management
+- Browser selection (Brave, Zen, Chrome)
+- Legacy Internet Explorer removal
+- OneDrive configuration with data preservation
+- Custom application preferences
 
-### 🛠️ Advanced Options
-Users can optionally configure:
+### Advanced Options
+Users may optionally configure:
 - System security settings
 - Windows Update behavior
 - Default browser preferences
 - System component management
 
-> ⚠️ **Advanced options should only be used by experienced users who understand the implications.**
+> Advanced options should only be used by experienced users who understand their implications.
 
 ---
 
-## 📋 System Requirements
+## System Requirements
 
 ### Supported Windows Versions
 
-| Version | Build Number | Status |
-|---------|--------------|--------|
-| Windows 10 1909 | 18363 | ✅ Supported |
-| Windows 10 2004 | 19041 | ✅ Supported |
-| Windows 10 20H2 | 19042 | ✅ Supported |
-| Windows 10 21H1 | 19043 | ✅ Supported |
-| Windows 10 21H2 | 19044 | ✅ Supported |
-| Windows 10 22H2 | 19045 | ✅ Supported |
-| Windows 11 21H2 | 22000 | ✅ Supported |
-| Windows 11 22H2 | 22621 | ✅ Supported |
-| Windows 11 23H2 | 22631 | ✅ Supported |
-| Windows 11 24H2 | 22635 | ✅ Supported |
-| Windows 11 Insider | 26100+ | ✅ Supported |
+| Version | Build | Status |
+|---------|-------|--------|
+| Windows 10 1909 | 18363 | Supported |
+| Windows 10 2004 | 19041 | Supported |
+| Windows 10 20H2 | 19042 | Supported |
+| Windows 10 21H1 | 19043 | Supported |
+| Windows 10 21H2 | 19044 | Supported |
+| Windows 10 22H2 | 19045 | Supported |
+| Windows 11 21H2 | 22000 | Supported |
+| Windows 11 22H2 | 22621 | Supported |
+| Windows 11 23H2 | 22631 | Supported |
+| Windows 11 24H2 | 22635 | Supported |
+| Windows 11 Insider | 26100+ | Supported |
 
 ### Prerequisites
-- ✅ Internet connection
-- ✅ No pending Windows updates
-- ✅ Device plugged into power
-- ✅ [AME Wizard](https://ameliorated.io) installed
-- ✅ **System backup created**
-- ✅ **Understanding of Windows system administration**
+- Internet connection
+- No pending Windows updates
+- Device plugged into power
+- [AME Wizard](https://ameliorated.io) installed
+- System backup created
+- Understanding of Windows system administration
 
 ---
 
-## 🚀 Installation
+## Installation
 
-### ⚠️ Pre-Installation Checklist
+### Pre-Installation Checklist
 
 Before proceeding, ensure you have:
-1. ✅ Created a full system backup or restore point
-2. ✅ Saved all important work
-3. ✅ Tested in a virtual machine (recommended)
-4. ✅ Read and understood all options
-5. ✅ Accepted the risks of system modification
+
+1. Created a full system backup or restore point
+2. Saved all important work
+3. Tested in a virtual machine (recommended)
+4. Read and understood all options
+5. Accepted the risks of system modification
 
 ### Step 1: Download AME Wizard
 1. Visit [ameliorated.io](https://ameliorated.io)
@@ -137,26 +134,26 @@ Before proceeding, ensure you have:
 ### Step 3: Run the Playbook
 1. Open **AME Wizard**
 2. Drag and drop `AtomPlaybook_0.1.apbx` into AME Wizard
-3. **Carefully review** all available options
+3. Carefully review all available options
 4. Select your preferences:
-   - Choose your browser (Brave, Zen, Chrome, or None)
-   - Select theme preference (Default or Atom Theme)
-   - Configure advanced options (if applicable)
+   - Browser (Brave, Zen, Chrome, or None)
+   - Theme (Default or Atom Theme)
+   - Advanced options (if applicable)
 5. Click **Run** and wait for completion
 6. Restart your computer when prompted
 
 ---
 
-## 🎯 What Gets Modified?
+## What Gets Modified?
 
-### 📦 Removed Components (Optional)
+### Removed Components (Optional)
 - Internet Explorer (legacy browser)
 - OneDrive integration (with data preservation)
 - Pre-installed UWP applications
 - Web search integration in Start Menu
 - Telemetry scheduled tasks
 
-### ⚙️ Modified Settings
+### Modified Settings
 - Privacy and telemetry configurations
 - File Explorer display options
 - Taskbar appearance
@@ -164,7 +161,7 @@ Before proceeding, ensure you have:
 - Search behavior (local-focused)
 - Visual effects and performance
 
-### 🎨 Added Features
+### Added Features
 - Atom custom theme (optional)
 - Browser of choice installation
 - Optimized visual settings
@@ -172,7 +169,160 @@ Before proceeding, ensure you have:
 
 ---
 
-## 🔄 Reverting Changes
+## Disabled Features
+
+The following Windows features are disabled by the playbook (unless opted out):
+
+<details>
+<summary>Click to expand the complete list</summary>
+
+- Windows Update
+- Telemetry & CEIP
+- Windows Search
+- Print Spooler
+- Fax
+- File History
+- Windows Error Reporting
+- Remote Desktop (as server)
+- Remote Registry
+- Connected Devices Platform
+- Delivery Optimization
+- Bluetooth
+- Wi-Fi Direct
+- Device Management Enrollment
+- Certificate Propagation
+- Smart Card
+- Parental Controls
+- Geolocation
+- Sensors
+- Tablet & Pen Input
+- Touch Keyboard
+- Windows Connect Now (WCN)
+- SSDP Discovery / UPnP
+- Windows Image Acquisition (WIA)
+- Windows Media Player Network Sharing
+- Cortana
+- Windows Spotlight
+- Live Tiles
+- Toast Notifications
+- Xbox Accessory Management
+- Microsoft Edge Update
+- Google Chrome Background Updates
+- Microsoft Store automatic downloads
+- OneDrive (auto-sync, if killed)
+- GameDVR & Game Bar (if killed)
+- Widgets (if killed)
+- Your Phone (if killed)
+- Windows Insider Program
+- Phone Service
+- WalletService
+- NFC Service
+
+</details>
+
+---
+
+## Disabled Services
+
+The following Windows services are disabled by the playbook:
+
+<details>
+<summary>Click to expand the complete list</summary>
+
+| Service Name | Description |
+|--------------|-------------|
+| AeLookupSvc | Application Experience – telemetry and compatibility checks |
+| ALG | Application Layer Gateway Service – legacy firewall component |
+| AppIDSvc | Application Identity – used for AppLocker |
+| AppMgmt | Application Management – group policy software installation |
+| AppReadiness | App Readiness – prepares apps on first login |
+| AutoTimeUpdater | Auto Time Zone Updater |
+| BITS | Background Intelligent Transfer Service |
+| Browser | Computer Browser (deprecated) |
+| BTAGService | Bluetooth Audio Gateway Service |
+| bthserv | Bluetooth Support Service |
+| CDPSvc | Connected Devices Platform Service |
+| CDPUserSvc | Connected Devices Platform User Service |
+| DiagTrack | Connected User Experiences and Telemetry |
+| DispBrokerDesktopSvc | Display Policy Service |
+| DPS | Diagnostic Policy Service |
+| WdiServiceHost | Diagnostic Service Host |
+| WdiSystemHost | Diagnostic System Host |
+| DmEnrollmentSvc | Device Management Enrollment Service |
+| dmwappushservice | Device Management WAP Push |
+| DoSvc | Delivery Optimization |
+| EFS | Encrypting File System |
+| Fax | Fax Service |
+| fhsvc | File History Service |
+| FontCache | Windows Font Cache |
+| GraphicsPerfSvc | Graphics Performance Service |
+| hidserv | Human Interface Device Service |
+| ICSSvc | Internet Connection Sharing |
+| IpxlatCfgSvc | IP Translation Configuration Service |
+| Kdc | Kerberos Local Key Distribution Center |
+| KtmRm | KtmRm for Distributed Transaction Coordinator |
+| lfsvc | Geolocation Service |
+| LicenseManager | Windows License Manager Service |
+| lltdsvc | Link-Layer Topology Discovery Mapper |
+| MapsBroker | Downloaded Maps Manager |
+| MicrosoftEdgeUpdateService | Microsoft Edge Update Service |
+| MicrosoftEdgeUpdateServicem | Microsoft Edge Update Service (second instance) |
+| MSDTC | Distributed Transaction Coordinator |
+| NcaSvc | Network Connectivity Assistant |
+| NetSetupSvc | Network Setup Service |
+| NetTcpPortSharing | Net.Tcp Port Sharing |
+| P2PImSv | Peer Networking Identity Manager |
+| P2PSvc | Peer Networking Grouping |
+| PerfHost | Performance Counter DLL Host |
+| pla | Performance Logs & Alerts |
+| PNRPsvc | Peer Name Resolution Protocol |
+| PolicyAgent | IPsec Policy Agent |
+| PrintNotify | Print Device Configuration Service |
+| Spooler | Print Spooler |
+| PcaSvc | Program Compatibility Assistant Service |
+| RemoteAccess | Routing and Remote Access |
+| RemoteRegistry | Remote Registry |
+| RetailDemo | Retail Demo Service |
+| SCardSvr | Smart Card |
+| SensrSvc | Sensor Service |
+| SensorDataService | Sensor Data Service |
+| SensorMonitoringService | Sensor Monitoring Service |
+| SharedAccess | Internet Connection Sharing (ICS) |
+| ShellHWDetection | Shell Hardware Detection |
+| SmsRouter | Microsoft Windows SMS Router Service |
+| SNMPTRAP | SNMP Trap |
+| Spectrum | Windows Virtual Audio Device Proxy Service |
+| SSDPSRV | SSDP Discovery |
+| SysMain | SysMain (Superfetch) |
+| TabletInputService | Touch Keyboard and Handwriting Panel |
+| TapiSrv | Telephony |
+| TermService | Remote Desktop Services |
+| UmRdpService | Remote Desktop Services UserMode Port Redirector |
+| UsoSvc | Update Orchestrator Service |
+| WaaSMedicSvc | Windows Update Medic Service |
+| WalletService | Wallet Service |
+| WarpJITSvc | Warp JIT Service |
+| wbengine | Block Level Backup Engine |
+| WbioSrvc | Windows Biometric Service |
+| WcnSvc | Windows Connect Now - Config Registrar |
+| Wecsvc | Windows Event Collector |
+| WEPHostSvc | Windows Encryption Provider Host Service |
+| WFDSConMgrSvc | Wi-Fi Direct Services Connection Manager |
+| WiaRpc | Still Image Acquisition Events |
+| wisvc | Windows Insider Service |
+| WManSvc | Windows Management Service |
+| WMPNetworkSvc | Windows Media Player Network Sharing |
+| WpcMonSvc | Parental Controls |
+| wscsvc | Security Center |
+| WSearch | Windows Search |
+| wuauserv | Windows Update |
+| XboxGipSvc | Xbox Accessory Management Service |
+
+</details>
+
+---
+
+## Reverting Changes
 
 ### System Restore
 The recommended way to revert changes is through System Restore:
@@ -193,218 +343,65 @@ Removed apps can be reinstalled from:
 - Windows Settings > Apps > Optional Features
 - Windows installation media (for system components)
 
-> ℹ️ **Note**: Some modifications may require Windows repair or reinstallation to fully revert.
+> Some modifications may require Windows repair or reinstallation to fully revert.
 
 ---
 
-## 📊 Performance Impact
+## Performance Impact
 
 | Metric | Typical Result |
 |--------|----------------|
-| Boot Time | 20-40% improvement |
-| RAM Usage (Idle) | 30-40% reduction |
-| Background Processes | 40-50% fewer |
-| Disk Space | 5-10 GB freed |
+| Boot Time | 20–40% improvement |
+| RAM Usage (Idle) | 30–40% reduction |
+| Background Processes | 40–50% fewer |
+| Disk Space | 5–10 GB freed |
 | Telemetry Connections | Significantly reduced |
 
-*Results vary based on hardware, Windows version, and selected options*
+*Results vary based on hardware, Windows version, and selected options.*
 
 ---
 
-## 🛡️ Safety & Transparency
+## Safety & Transparency
 
 ### Data Preservation
-- ✅ OneDrive files moved to local folders before any removal
-- ✅ User documents, pictures, videos automatically preserved
-- ✅ Desktop items backed up
-- ✅ No data loss during customization process
+- OneDrive files are moved to local folders before any removal
+- User documents, pictures, and videos are automatically preserved
+- Desktop items are backed up
+- No data loss occurs during the customization process
 
 ### Open Source Transparency
-- 📖 All changes documented in YAML files
-- 🔍 Open-source codebase for community review
-- 🔐 No hidden modifications or telemetry
-- 📝 Detailed execution logs available
-- 🔓 No obfuscated code
+- All changes are documented in YAML files
+- Open-source codebase for community review
+- No hidden modifications or telemetry
+- Detailed execution logs are available
+- No obfuscated code
 
 ### Security Considerations
-- 🛡️ No external connections during installation
-- 🔒 No data collection or tracking by Atom Playbook
-- ✅ Community-verified and reviewed
-- 🔐 Transparent and auditable code
-- ⚠️ Users responsible for understanding security implications
+- No external connections during installation
+- No data collection or tracking by Atom Playbook
+- Community-verified and reviewed
+- Transparent and auditable code
+- Users are responsible for understanding security implications
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-We welcome contributions from the community! Here's how you can help:
+We welcome contributions from the community.
 
 ### Ways to Contribute
-1. **Report Bugs**: [Open an issue](https://github.com/projectatom1/Atom-Playbook/issues)
-2. **Suggest Features**: Share ideas in discussions
-3. **Submit Pull Requests**: Improve the playbook
-4. **Test**: Try on different Windows versions and configurations
-5. **Documentation**: Help improve guides and docs
-6. **Translations**: Help translate documentation
+1. **Report Bugs** – [Open an issue](https://github.com/projectatom1/Atom-Playbook/issues)
+2. **Suggest Features** – Share ideas in discussions
+3. **Submit Pull Requests** – Improve the playbook
+4. **Test** – Try on different Windows versions and configurations
+5. **Documentation** – Help improve guides and docs
+6. **Translations** – Help translate documentation
 
 ### Development Setup
 ```bash
 git clone https://github.com/ArabWep/Atom-Playbook.git
 cd Atom-Playbook
-
 # Review YAML files in Configuration/tasks/
 # Make your changes
 # Test thoroughly with AME Wizard
 # Submit a pull request
-```
-
-### Contribution Guidelines
-- Follow existing code style
-- Test all changes thoroughly
-- Document new features
-- Respect user choice and safety
-- Maintain transparency
-
----
-
-## 📝 Changelog
-
-### Version 0.1 (Current)
-- 🎉 Initial release
-- 🛡️ Basic privacy controls
-- 🚀 Core performance optimizations
-
----
-
-## ❓ FAQ
-
-### Is Atom Playbook safe to use?
-The playbook itself is safe and transparent. However, modifying system settings always carries risks. We recommend testing in a VM first and creating backups.
-
-### Can I undo the changes?
-Most changes can be reverted through Windows Settings or System Restore. Some modifications may require more advanced steps to fully reverse.
-
-### Will this break Windows?
-When used correctly, no. However, improper use or selecting incompatible options could cause issues. Always create a restore point first.
-
-### Does this work on Windows 11?
-Yes! Atom Playbook fully supports Windows 11 (21H2, 22H2, 23H2, 24H2, and Insider builds).
-
-### What's different from other playbooks?
-Atom focuses on balance: maximum customization while maintaining system stability. It includes a custom theme and prioritizes user choice.
-
-### Can I use this on my work computer?
-**Not recommended.** This playbook is designed for personal use and may conflict with enterprise policies and security requirements.
-
-### Is this legal?
-Yes. Customizing your own Windows installation is legal. However, users are responsible for complying with Microsoft's EULA and any applicable agreements.
-
----
-
-## 🔗 Links & Resources
-
-- 🌐 **Website**: [atom-os.com](https://www.atom-os.com/)
-- 📖 **Documentation**: [atom-os.com/docs](https://www.atom-os.com/docs)
-- 💬 **Discussions**: GitHub Discussions
-- 🐛 **Issues**: [Report bugs](https://github.com/projectatom1/Atom-Playbook/issues)
-- 📧 **Support**: Open an issue for assistance
-
----
-
-## 📜 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for full details.
-
-### What This Means:
-- ✅ Free to use, modify, and distribute
-- ✅ Commercial use allowed
-- ✅ No warranty provided
-- ⚠️ Use at your own risk
-- 📝 Attribution appreciated but not required
-
----
-
-## ⚠️ Disclaimer & Legal
-
-**IMPORTANT: READ CAREFULLY BEFORE USE**
-
-### Use At Your Own Risk
-
-This software is provided "AS IS" without warranty of any kind. The authors and contributors:
-- ❌ Make NO guarantees about compatibility or stability
-- ❌ Are NOT responsible for any damage or data loss
-- ❌ Do NOT provide official support or guarantees
-- ❌ Cannot be held liable for any consequences of use
-
-### User Responsibilities
-
-By using Atom Playbook, you acknowledge that:
-- ✅ You understand the risks of system modification
-- ✅ You have created appropriate backups
-- ✅ You accept full responsibility for any outcomes
-- ✅ You will not use this for malicious purposes
-- ✅ You comply with all applicable laws and agreements
-
-### Educational Purpose
-
-This project is intended for:
-- 📚 Educational purposes
-- 🔬 Research and experimentation
-- 🛠️ Advanced Windows customization
-- 💡 Learning about Windows internals
-
-### Not Recommended For:
-- ❌ Production or business-critical systems
-- ❌ Systems with specific compliance requirements
-- ❌ Users unfamiliar with Windows administration
-- ❌ Environments requiring vendor support
-
-### Third-Party Software
-
-This playbook may install or configure third-party software. Users are responsible for:
-- Reviewing licenses of installed software
-- Complying with terms of service
-- Understanding privacy implications
-- Verifying software authenticity
-
-### Microsoft Disclaimer
-
-**Project Atom** is an independent project and is NOT:
-- Affiliated with Microsoft Corporation
-- Endorsed by Microsoft Corporation
-- Supported by Microsoft Corporation
-
-Windows is a registered trademark of Microsoft Corporation.
-
----
-
-## 🙏 Acknowledgments
-
-Special thanks to:
-- **[AME Wizard](https://ameliorated.io)** - For the excellent playbook framework
-- **The Windows Community** - For testing, feedback, and contributions
-- **All Contributors** - For improving and maintaining this project
-- **Open Source Community** - For tools and inspiration
-
----
-
-## 💖 Support the Project
-
-If you find Atom Playbook useful:
-- ⭐ **Star this repository** - Helps others discover the project
-- 🐛 **Report bugs** - Help us improve quality
-- 💬 **Share feedback** - Tell us what works and what doesn't
-- 📝 **Contribute** - Submit improvements and fixes
-- 🗣️ **Spread the word** - Share with others who might benefit
-
----
-
-<div align="center">
-
-**Made with ❤️ by Project Atom**
-
-*Empowering users with choice and control over their Windows experience*
-
-[⬆ Back to Top](#-atom-playbook)
-
-</div>
