@@ -1,0 +1,5 @@
+--resolution 5060 --no-console
+
+shell:startup
+
+https://chart-studio.plotly.com/create/#/

@@ -1,0 +1,132 @@
+---
+title: Defender
+description: Remove Windows Defender (user-mode services only, zero kernel driver changes)
+privilege: TrustedInstaller
+option: disable-defender
+actions:
+
+  - !status: {status: 'Removing Windows Defender...'}
+
+  # ═══════════════════════════════════════════════════════════
+  # KILL DEFENDER PROCESSES
+  # ═══════════════════════════════════════════════════════════
+  - !taskKill: {name: 'NisSrv', errorAction: Ignore}
+  - !taskKill: {name: 'SecurityHealthHost', errorAction: Ignore}
+  - !taskKill: {name: 'SecurityHealthService', errorAction: Ignore}
+  - !taskKill: {name: 'SecurityHealthSystray', errorAction: Ignore}
+  - !taskKill: {name: 'MsMpEng', errorAction: Ignore}
+  - !taskKill: {name: 'smartscreen', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # DELETE USER-MODE DEFENDER SERVICES (NOT kernel drivers)
+  # ═══════════════════════════════════════════════════════════
+  - !service: {name: 'WinDefend', operation: delete, errorAction: Ignore}
+  - !service: {name: 'Sense', operation: delete, errorAction: Ignore}
+  - !service: {name: 'WdNisSvc', operation: delete, errorAction: Ignore}
+  - !service: {name: 'SecurityHealthService', operation: delete, errorAction: Ignore}
+  - !service: {name: 'SgrmBroker', operation: delete, errorAction: Ignore}
+  - !service: {name: 'SgrmAgent', operation: delete, errorAction: Ignore}
+  - !service: {name: 'MsSecCore', operation: delete, errorAction: Ignore}
+  - !service: {name: 'webthreatdefusersvc', operation: delete, errorAction: Ignore}
+  - !service: {name: 'webthreatdefsvc', operation: delete, errorAction: Ignore}
+  - !service: {name: 'MDCoreSvc', operation: delete, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # DISABLE DEFENDER SCHEDULED TASKS
+  # ═══════════════════════════════════════════════════════════
+  - !scheduledTask: {path: '\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance', operation: delete, errorAction: Ignore}
+  - !scheduledTask: {path: '\Microsoft\Windows\Windows Defender\Windows Defender Cleanup', operation: delete, errorAction: Ignore}
+  - !scheduledTask: {path: '\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan', operation: delete, errorAction: Ignore}
+  - !scheduledTask: {path: '\Microsoft\Windows\Windows Defender\Windows Defender Verification', operation: delete, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # DISABLE DEFENDER REGISTRY POLICIES
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender', value: 'DisableAntiSpyware', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection', value: 'DisableBehaviorMonitoring', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection', value: 'DisableScanOnRealtimeEnable', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Microsoft Antimalware\Real-Time Protection', value: 'DisableOnAccessProtection', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Microsoft Antimalware\Real-Time Protection', value: 'DisableScanOnRealtimeEnable', type: REG_DWORD, data: '1', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # DISABLE SMARTSCREEN
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer', value: 'SmartScreenEnabled', type: REG_SZ, data: 'Off', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\System', value: 'EnableSmartScreen', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen', value: 'EnableSmartScreen', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost', value: 'EnableWebContentEvaluation', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Edge', value: 'SmartScreenEnabled', type: REG_SZ, data: '0', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # DISABLE HVCI / KERNEL GUARD
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity', value: 'Enabled', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\CI\Config', value: 'VulnerableDriverBlocklistEnable', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\CI\Policy', value: 'VerifiedAndReputablePolicyState', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows Defender', value: 'PUAProtection', type: REG_DWORD, data: '0', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # DISABLE DEFENDER AUTOLOGGER
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger', value: 'Start', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderAuditLogger', value: 'Start', type: REG_DWORD, data: '0', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # REMOVE DEFENDER CONTEXT MENU ENTRIES
+  # ═══════════════════════════════════════════════════════════
+  - !registryKey: {path: 'HKLM\SOFTWARE\Classes\*\ShellEx\ContextMenuHandlers\EPP', operation: delete, errorAction: Ignore}
+  - !registryKey: {path: 'HKLM\SOFTWARE\Classes\Drive\ShellEx\ContextMenuHandlers\EPP', operation: delete, errorAction: Ignore}
+  - !registryKey: {path: 'HKLM\SOFTWARE\Classes\Directory\ShellEx\ContextMenuHandlers\EPP', operation: delete, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # REMOVE DEFENDER RUN ENTRIES
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run', value: 'SecurityHealth', operation: delete, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # DISABLE WTDS (Windows Threat Defense Service)
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WTDS\Components', value: 'ServiceEnabled', type: REG_DWORD, data: '0', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # DISABLE DEFENDER SPYNET
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows Defender\Spynet', value: 'SubmitSamplesConsent', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows Defender\Spynet', value: 'SpyNetReporting', type: REG_DWORD, data: '0', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # REMOVE DEFENDER APPX PACKAGES
+  # ═══════════════════════════════════════════════════════════
+  - !appx: {name: '*SecHealthUI*', type: family, errorAction: Ignore}
+  - !appx: {name: 'Microsoft.Windows.Apprep.ChxApp*', type: family, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # DISABLE WINDOWS DEFENDER FEATURE VIA DISM
+  # ═══════════════════════════════════════════════════════════
+  - !run: {exe: 'DISM.exe', args: '/Online /Disable-Feature /FeatureName:"Windows-Defender-Default-Definitions" /NoRestart', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # DELETE DEFENDER FILES — user-mode only, zero BSOD risk
+  # ═══════════════════════════════════════════════════════════
+  - !powerShell:
+    command: >-
+      $paths = @(
+        "$env:SystemRoot\System32\SecurityHealthSystray.exe",
+        "$env:SystemRoot\System32\SecurityHealthService.exe",
+        "$env:SystemRoot\System32\SecurityHealthAgent.dll",
+        "$env:SystemRoot\System32\SecurityHealthHost.exe",
+        "$env:SystemRoot\System32\SecurityHealthCore.dll",
+        "$env:SystemRoot\System32\SecurityHealthProxyStub.dll",
+        "$env:SystemRoot\System32\SecurityHealthUdk.dll",
+        "$env:SystemRoot\System32\drivers\WdNisDrv.sys"
+      );
+      foreach ($p in $paths) { if (Test-Path $p) { Remove-Item $p -Force -ErrorAction SilentlyContinue } }
+    errorAction: Ignore
+  # Delete kernel driver service keys (not the .sys files — WRP protected)
+  - !service: {name: 'WdFilter', operation: delete, errorAction: Ignore}
+  - !service: {name: 'WdBoot', operation: delete, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # BLOCK SECHEALTH UI REINSTALL (Deprovisioned)
+  # ═══════════════════════════════════════════════════════════
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.Windows.SecHealthUI_cw5n1h2txyewy', operation: add, errorAction: Ignore}

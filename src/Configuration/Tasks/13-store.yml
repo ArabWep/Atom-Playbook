@@ -1,0 +1,85 @@
+---
+title: Store
+description: Fully remove Windows Store and all its components
+privilege: TrustedInstaller
+actions:
+
+  - !status: {status: 'Removing Windows Store...'}
+
+  # ═══════════════════════════════════════════════════════════
+  # KILL STORE PROCESSES
+  # ═══════════════════════════════════════════════════════════
+  - !taskKill: {name: 'WinStore.App', errorAction: Ignore}
+  - !taskKill: {name: 'WinStore.App.Host', errorAction: Ignore}
+  - !taskKill: {name: 'WSService', errorAction: Ignore}
+  - !taskKill: {name: 'InstallAgent', errorAction: Ignore}
+  - !taskKill: {name: 'InstallAgentUserSvc', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # REMOVE STORE SERVICES
+  # ═══════════════════════════════════════════════════════════
+  - !service: {name: 'InstallService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'TokenBroker', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WalletService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WSService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'AppXSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'ClipSVC', operation: change, startup: 4, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # REMOVE STORE APPX PACKAGES (ALL USERS)
+  # ═══════════════════════════════════════════════════════════
+  - !appx: {name: 'Microsoft.WindowsStore*', type: family, errorAction: Ignore}
+  - !appx: {name: 'Microsoft.StorePurchaseApp*', type: family, errorAction: Ignore}
+  - !appx: {name: 'Microsoft.DesktopAppInstaller*', type: family, errorAction: Ignore}
+  - !appx: {name: 'Microsoft.XboxIdentityProvider*', type: family, errorAction: Ignore}
+  - !appx: {name: 'Microsoft.Xbox.TCUI*', type: family, errorAction: Ignore}
+  - !appx: {name: 'Microsoft.XboxGameOverlay*', type: family, errorAction: Ignore}
+  - !appx: {name: 'Microsoft.XboxGamingOverlay*', type: family, errorAction: Ignore}
+  - !appx: {name: 'Microsoft.XboxSpeechToTextOverlay*', type: family, errorAction: Ignore}
+  - !appx: {name: 'Microsoft.Xbox*', type: family, errorAction: Ignore}
+  - !appx: {name: 'Microsoft.StoreExtensions*', type: family, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # REMOVE STORE FILES
+  # ═══════════════════════════════════════════════════════════
+  - !powerShell:
+    command: >-
+      $paths = @(
+        "$env:ProgramFiles\WindowsApps\Microsoft.WindowsStore*",
+        "$env:ProgramFiles\WindowsApps\Microsoft.StorePurchaseApp*",
+        "$env:ProgramFiles\WindowsApps\Microsoft.DesktopAppInstaller*",
+        "$env:ProgramFiles\WindowsApps\Microsoft.Xbox*",
+        "$env:LOCALAPPDATA\Packages\Microsoft.WindowsStore*",
+        "$env:LOCALAPPDATA\Packages\Microsoft.StorePurchaseApp*",
+        "$env:LOCALAPPDATA\Packages\Microsoft.DesktopAppInstaller*"
+      );
+      foreach ($p in $paths) { Get-Item $p -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue }
+    errorAction: Ignore
+
+  # ═══════════════════════════════════════════════════════════
+  # REMOVE STORE REGISTRY
+  # ═══════════════════════════════════════════════════════════
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate', operation: delete, errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\WindowsStore', value: 'RemoveWindowsStore', data: '1', type: REG_DWORD, errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\WindowsStore', value: 'DisableStoreApps', data: '1', type: REG_DWORD, errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\WindowsStore', value: 'AutoDownload', data: '2', type: REG_DWORD, errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\WindowsStore', value: 'DisableOSUpgrade', data: '1', type: REG_DWORD, errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\WindowsStore', value: 'DisableStoreContextSearch', data: '1', type: REG_DWORD, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # BLOCK STORE REINSTALL
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\WindowsStore', value: 'AllowStoreToRunInBackground', data: '0', type: REG_DWORD, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # REMOVE STORE SCHEDULED TASKS
+  # ═══════════════════════════════════════════════════════════
+  - !scheduledTask: {path: '\Microsoft\Windows\InstallService\SmartRetry', operation: delete, errorAction: Ignore}
+  - !scheduledTask: {path: '\Microsoft\Windows\WS\WSRefreshBannedAppsListTask', operation: delete, errorAction: Ignore}
+  - !scheduledTask: {path: '\Microsoft\Windows\WS\WSTask', operation: delete, errorAction: Ignore}
+  - !scheduledTask: {path: '\Microsoft\Windows\WCM\WiFiTask', operation: delete, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # DISABLE STORE AUTO-UPDATE
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\WindowsStore', value: 'EnableAutoStoreUpdates', data: '0', type: REG_DWORD, errorAction: Ignore}

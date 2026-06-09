@@ -1,0 +1,153 @@
+---
+title: UI
+description: Clean up Windows UI, taskbar icons, explorer, dark mode, context menu
+privilege: TrustedInstaller
+actions:
+
+  - !status: {status: 'Cleaning up UI and taskbar...'}
+
+  # ═══════════════════════════════════════════════════════════
+  # TASKBAR — REMOVE ALL ICONS
+  # ═══════════════════════════════════════════════════════════
+  # Search box: hide (0=no icon, 1=search icon, 2=search bar)
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search', value: 'SearchboxTaskbarMode', type: REG_DWORD, data: 0, errorAction: Ignore}
+  # Task View button: hidden
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'ShowTaskViewButton', type: REG_DWORD, data: 0, errorAction: Ignore}
+  # Copilot button: hidden
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'ShowCopilotButton', type: REG_DWORD, data: 0, errorAction: Ignore}
+  # Chat icon: hidden
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarMn', type: REG_DWORD, data: 0, errorAction: Ignore}
+  # Widgets: hidden
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarDa', type: REG_DWORD, data: 0, errorAction: Ignore}
+  # Taskbar size: normal/large icons
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarSmallIcons', type: REG_DWORD, data: 0, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarSi', type: REG_DWORD, data: 2, errorAction: Ignore}
+  # Always combine buttons, hide labels
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarGlomLevel', type: REG_DWORD, data: 0, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'MMTaskbarGlomLevel', type: REG_DWORD, data: 0, errorAction: Ignore}
+  # Hide sync provider notifications
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'ShowSyncProviderNotifications', type: REG_DWORD, data: 0, errorAction: Ignore}
+  # Disable track programs
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'Start_TrackProgs', type: REG_DWORD, data: 0, errorAction: Ignore}
+  # Hide People bar
+  - !registryValue: {path: 'HKCU\Software\Policies\Microsoft\Windows\Explorer', value: 'HidePeopleBar', type: REG_DWORD, data: 1, errorAction: Ignore}
+  # Hide Meet Now
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'HideSCAMeetNow', type: REG_DWORD, data: 1, errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'HideSCAMeetNow', type: REG_DWORD, data: 1, errorAction: Ignore}
+  # Disable Chat icon
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Chat', value: 'ChatIcon', type: REG_DWORD, data: 3, errorAction: Ignore}
+  # Disable News and Interests / Widgets feeds
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds', value: 'EnableFeeds', type: REG_DWORD, data: 0, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds', value: 'ShellFeedsTaskbarViewMode', type: REG_DWORD, data: 2, errorAction: Ignore}
+  # Block WebExperience reinstall
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Dsh', value: 'AllowNewsAndInterests', type: REG_DWORD, data: 0, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # CLEAR TASKBAR PINNED ITEMS + JUMP LISTS
+  # ═══════════════════════════════════════════════════════════
+  - !powerShell:
+    command: |
+      # Clear Taskband registry (pinned taskbar items)
+      $taskband = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband'
+      if (Test-Path $taskband) {
+          Remove-ItemProperty -Path $taskband -Name 'Favorites' -Force -ErrorAction SilentlyContinue
+          Remove-ItemProperty -Path $taskband -Name 'FavoritesResolve' -Force -ErrorAction SilentlyContinue
+          Remove-ItemProperty -Path $taskband -Name 'QuickLaunch' -Force -ErrorAction SilentlyContinue
+      }
+      # Clear Jump List caches
+      $jumpListPaths = @(
+          "$env:APPDATA\Microsoft\Windows\Recent\AutomaticDestinations"
+          "$env:APPDATA\Microsoft\Windows\Recent\CustomDestinations"
+          "$env:APPDATA\Microsoft\Windows\Recent\Destinations"
+      )
+      foreach ($jl in $jumpListPaths) {
+          if (Test-Path $jl) { Remove-Item "$jl\*" -Force -ErrorAction SilentlyContinue }
+      }
+      # Clear recent items
+      $recent = "$env:APPDATA\Microsoft\Windows\Recent"
+      if (Test-Path $recent) { Remove-Item "$recent\*" -Force -ErrorAction SilentlyContinue }
+    runas: currentUserElevated
+    errorAction: Ignore
+
+  # ═══════════════════════════════════════════════════════════
+  # EXPLORER
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer', value: 'ShowFrequent', type: REG_DWORD, data: 0, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer', value: 'EnableAutoTray', type: REG_DWORD, data: 1, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'EnableBalloonTips', type: REG_DWORD, data: 0, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'DisallowShaking', type: REG_DWORD, data: 1, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer', value: 'ShowRunAsDifferentUserInStart', type: REG_DWORD, data: 1, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'LaunchTO', type: REG_DWORD, data: 1, errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'HideMergeConflicts', type: REG_DWORD, data: 1, errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer', value: 'ShowCloudIconInNavigationPane', type: REG_DWORD, data: 0, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'NavPaneShowAllFolders', type: REG_DWORD, data: 0, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CabinetState', value: 'FullPath', type: REG_DWORD, data: 1, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CabinetState', value: 'FullPathAddress', type: REG_DWORD, data: 1, errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer', value: 'Max Cached Icons', type: REG_SZ, data: '4096', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # NOTIFICATIONS
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications', value: 'ToastEnabled', type: REG_DWORD, data: 0, errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications', value: 'NoCloudApplicationNotification', type: REG_DWORD, data: 1, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings', value: 'NOC_GLOBAL_SETTING_ALLOW_NOTIFICATION_SOUND', type: REG_DWORD, data: 0, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings', value: 'NOC_GLOBAL_SETTING_ALLOW_CRITICAL_TOASTS_ABOVE_LOCK', type: REG_DWORD, data: 0, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings', value: 'NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK', type: REG_DWORD, data: 0, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # DARK MODE
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'AppsUseLightTheme', type: REG_DWORD, data: 0, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'SystemUsesLightTheme', type: REG_DWORD, data: 0, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'TransparencyEffects', type: REG_DWORD, data: 0, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # CONTEXT MENU (Windows 11 classic)
+  # ═══════════════════════════════════════════════════════════
+  - !registryKey: {path: 'HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32', operation: add, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32', value: '(Default)', type: REG_SZ, data: '', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # HIDE DESKTOP ICONS
+  # ═══════════════════════════════════════════════════════════
+  # Hide Recycle Bin from desktop
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel', value: '{645FF040-5081-101B-9F08-00AA002F954E}', type: REG_DWORD, data: 1, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # SHOW FILE EXTENSIONS / HIDDEN FILES
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'Hidden', type: REG_DWORD, data: 1, errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'HideFileExt', type: REG_DWORD, data: 0, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # RESTART EXPLORER TO APPLY TASKBAR CHANGES
+  # ═══════════════════════════════════════════════════════════
+  - !taskKill: {name: 'explorer', errorAction: Ignore}
+  - !powerShell:
+    command: 'Start-Process explorer.exe'
+    runas: currentUserElevated
+    errorAction: Ignore
+
+  # ═══════════════════════════════════════════════════════════
+  # Clean up Start Menu folders (PowerShell for reliable env var expansion)
+  # ═══════════════════════════════════════════════════════════
+  - !powerShell:
+    command: >-
+      $folders = @(
+        "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\Accessibility",
+        "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\Maintenance",
+        "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\Windows Accessories",
+        "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\Windows PowerShell",
+        "$env:SystemDrive\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessibility",
+        "$env:SystemDrive\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessories",
+        "$env:SystemDrive\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Maintenance",
+        "$env:SystemDrive\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Windows PowerShell",
+        "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Accessibility",
+        "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Accessories",
+        "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Maintenance",
+        "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Windows PowerShell"
+      );
+      foreach ($f in $folders) {
+        if (Test-Path $f) { Remove-Item $f -Recurse -Force -ErrorAction SilentlyContinue }
+      }
+    errorAction: Ignore

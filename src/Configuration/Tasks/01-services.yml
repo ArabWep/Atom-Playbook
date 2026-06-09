@@ -1,0 +1,205 @@
+---
+title: Services
+description: Disable unnecessary user-mode services
+privilege: TrustedInstaller
+actions:
+
+  - !status: {status: 'Disabling services...'}
+
+  # ═══════════════════════════════════════════════════════════
+  # TELEMETRY / DIAGNOSTICS
+  # ═══════════════════════════════════════════════════════════
+  - !service: {name: 'DiagTrack', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'dmwappushservice', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'diagnosticshub.standardcollector.service', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'diagsvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WdiServiceHost', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WdiSystemHost', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WerSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'wercplsupport', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'PcaSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'Telemetry', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'pla', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'wmiApSrv', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'Wecsvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'DPS', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'TroubleshootingSvc', operation: change, startup: 4, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # CLOUD / SYNC / PUSH
+  # ═══════════════════════════════════════════════════════════
+  - !service: {name: 'OneSyncSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WpnService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WpnUserService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'DataUsageSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'Dssvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'DsSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'CloudIdSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'CloudBackupRestoreSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'cbdhsvc', operation: change, startup: 4, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # XBOX / GAMING
+  # ═══════════════════════════════════════════════════════════
+  - !service: {name: 'XblAuthManager', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'XblGameSave', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'XboxGipSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'XboxNetApiSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'BcastDVRUserService', operation: change, startup: 4, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # SEARCH / INDEXING
+  # ═══════════════════════════════════════════════════════════
+  - !service: {name: 'WSearch', operation: change, startup: 4, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # SYSTEM / MISC
+  # ═══════════════════════════════════════════════════════════
+  - !service: {name: 'SysMain', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'Themes', operation: change, startup: 3, errorAction: Ignore}
+  - !service: {name: 'TrkWks', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WMPNetworkSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'VacSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'UserDataSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'UnistoreSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'PimIndexMaintenanceSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'spectrum', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'SpatialGraphFilter', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'SharedRealitySvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'SharedAccess', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'SgrmBroker', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'SgrmAgent', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'perceptionsimulation', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'MixedRealityOpenXRSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'SensrSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'SensorService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'SensorDataService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'svsvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'embeddedmode', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WPDBusEnum', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'wisvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WpcMonSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'MapsBroker', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'RetailDemo', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'SessionEnv', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'TermService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'UmRdpService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'LicenseManager', operation: change, startup: 3, errorAction: Ignore}
+  - !service: {name: 'AutoTimeUpdater', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'tzautoupdate', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'W32Time', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'autotimesvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'MessagingService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'Semgrsvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WarpJITSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'McpManagementService', operation: change, startup: 4, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # PRINTING / SCANNING (ALL)
+  # ═══════════════════════════════════════════════════════════
+  - !service: {name: 'Spooler', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'printworkflowusersvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'stisvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'PrintNotify', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'usbprint', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'PrintScanBrokerService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'PrintDeviceConfigurationService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'LPTEnum', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'Parallel', operation: change, startup: 4, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # BLUETOOTH (ALL - every single one)
+  # ═══════════════════════════════════════════════════════════
+  - !service: {name: 'BluetoothUserService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'BthAvctpSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'BthEnum', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'BthHFEnum', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'BthLEEnum', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'BthA2dp', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'BTHMODEM', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'Microsoft_Bluetooth_AvrcpTransport', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'RFCOMM', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'bthserv', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'BTAGService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'BluetoothAudioSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'BthMini', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'BthRadUsb', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'Microsoft_Bluetooth_AvctpTransport', operation: change, startup: 4, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # NETWORK (user-mode only)
+  # ═══════════════════════════════════════════════════════════
+  - !service: {name: 'SSDPSRV', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'SmsRouter', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'IpxlatCfgSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'NetTcpPortSharing', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'KtmRm', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'MSDTC', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'RmSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'LanmanWorkstation', operation: change, startup: 3, errorAction: Ignore}
+  - !service: {name: 'LanmanServer', operation: change, startup: 3, errorAction: Ignore}
+  - !service: {name: 'lmhosts', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'NdisWan', operation: change, startup: 3, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # PHONES / TELEPHONY
+  # ═══════════════════════════════════════════════════════════
+  - !service: {name: 'PhoneSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'TapiSrv', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'lfsvc', operation: change, startup: 4, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # SMART CARD
+  # ═══════════════════════════════════════════════════════════
+  - !service: {name: 'SCardSvr', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'ScDeviceEnum', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'SCPolicySvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'scfilter', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'SEMgrSvc', operation: change, startup: 4, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # OTHER
+  # ═══════════════════════════════════════════════════════════
+  - !service: {name: 'AppVClient', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'AJRouter', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'AppIDSvc', operation: change, startup: 3, errorAction: Ignore}
+  - !service: {name: 'DsmSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'DialogBlockingService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'MsKeyboardFilter', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'icssvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'ShellHWDetection', operation: change, startup: 3, errorAction: Ignore}
+  - !service: {name: 'defragsvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'FontCache', operation: change, startup: 3, errorAction: Ignore}
+  - !service: {name: 'MSiSCSI', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'PenService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'P9RdrService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'PNRPsvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'p2psvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'p2pimsvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'PeerDistSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'RasAuto', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'RasAcd', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'terminpt', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'TsUsbGD', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'VSS', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WaaSMedicSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WalletService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'wbengine', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WbioSrvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WEPHOSTSVC', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'wdiservicehost', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'wdisystemhost', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'DisplayEnhancementService', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'VaultSvc', operation: change, startup: 3, errorAction: Ignore}
+  - !service: {name: 'EventSystem', operation: change, startup: 3, errorAction: Ignore}
+  - !service: {name: 'GraphicsPerfSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'AxInstSV', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'AarSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'cloudidsvc', operation: change, startup: 4, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # UAC (optional — disables UAC prompts)
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableLUA', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'ConsentPromptBehaviorAdmin', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'PromptOnSecureDesktop', type: REG_DWORD, data: '0', errorAction: Ignore}

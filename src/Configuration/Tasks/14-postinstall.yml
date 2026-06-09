@@ -1,0 +1,24 @@
+title: Copy PostInstall Folder
+description: Copies PostInstall folder to Desktop for easy access
+privilege: Admin
+actions:
+  - !status: {status: 'Copying PostInstall folder to Desktop...'}
+  
+  # Copy PostInstall folder to Desktop (uses !run + PowerShell for reliability)
+  - !run:
+    exeDir: true
+    exe: 'PowerShell.exe'
+    args: '-NoProfile -ExecutionPolicy Bypass -File Copy-PostInstall.ps1'
+    wait: true
+    runas: currentUserElevated
+    errorAction: Ignore
+
+  # Install AtomToolBox to Program Files + Desktop shortcut + Start Menu + Taskbar pin
+  - !status: {status: 'Installing AtomToolBox...'}
+  - !run:
+    exeDir: true
+    exe: 'PowerShell.exe'
+    args: '-NoProfile -ExecutionPolicy Bypass -File Install-AtomToolBox.ps1'
+    wait: true
+    runas: currentUserElevated
+    errorAction: Ignore

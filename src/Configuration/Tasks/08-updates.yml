@@ -1,0 +1,19 @@
+---
+title: Updates
+description: Disable Windows Update
+privilege: TrustedInstaller
+option: disable-updates
+actions:
+
+  - !status: {status: 'Disabling Windows Update...'}
+
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoUpdate', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update', value: 'AUOptions', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update', value: 'NoAutoUpdate', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !service: {name: 'wuauserv', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'UsoSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WaaSMedicSvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'BITS', operation: change, startup: 4, errorAction: Ignore}
+
+  - !scheduledTask: {path: '\Microsoft\Windows\WindowsUpdate\Scheduled Start', operation: delete, errorAction: Ignore}
+  - !scheduledTask: {path: '\Microsoft\Windows\WindowsUpdate\sih', operation: delete, errorAction: Ignore}

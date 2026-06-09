@@ -1,0 +1,184 @@
+---
+title: Performance
+description: Optimize system performance, memory, power, networking
+privilege: TrustedInstaller
+actions:
+
+  - !status: {status: 'Optimizing performance...'}
+
+  # ═══════════════════════════════════════════════════════════
+  # MMCSS (Multimedia Class Scheduler)
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile', value: 'NoLazyMode', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile', value: 'NetworkThrottlingIndex', type: REG_DWORD, data: '4294967295', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile', value: 'SystemResponsiveness', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games', value: 'GPU Priority', type: REG_DWORD, data: '8', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games', value: 'Priority', type: REG_DWORD, data: '6', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games', value: 'Scheduling Category', type: REG_SZ, data: 'High', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games', value: 'SFIO Priority', type: REG_SZ, data: 'High', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # PRIORITY SEPARATION
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl', value: 'Win32PrioritySeparation', type: REG_DWORD, data: '38', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # MEMORY MANAGEMENT
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management', value: 'LargeSystemCache', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management', value: 'DisablePagingExecutive', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management', value: 'DisablePageCombining', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management', value: 'FeatureSettingsOverride', type: REG_DWORD, data: '3', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management', value: 'FeatureSettingsOverrideMask', type: REG_DWORD, data: '3', errorAction: Ignore}
+  - !powerShell: {command: 'Disable-MMAgent -mc', errorAction: Ignore}
+  # Disable background apps
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications', value: 'GlobalUserDisabled', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search', value: 'BackgroundAppGlobalToggle', type: REG_DWORD, data: '0', errorAction: Ignore}
+  # Disable FTH (Fault Tolerant Heap)
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\FTH', value: 'Enabled', type: REG_DWORD, data: '0', errorAction: Ignore}
+  # Service Host split threshold
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control', value: 'SvcHostSplitThresholdInKB', type: REG_DWORD, data: '4294967295', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # POWER
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Power', value: 'HibernateEnabledDefault', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Power', value: 'HiberbootEnabled', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Power', value: 'EnergyEstimationEnabled', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Power', value: 'EventProcessorEnabled', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Power', value: 'PowerThrottlingOff', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Power', value: 'MSDisabled', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Power', value: 'ThermalTelemetryVerbosity', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\stornvme\Parameters\Device', value: 'IdlePowerMode', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\stornvme\Parameters\Device', value: 'DisableDSTThrottle', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Storage', value: 'StorageD3InModernStandby', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Power', value: 'CsEnabled', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Power', value: 'PlatformAoAcOverride', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Power', value: 'AoAcRemotableEnable', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !run: {exe: 'powercfg', args: '/h off', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # NETWORKING
+  # ═══════════════════════════════════════════════════════════
+  - !powerShell: {command: 'Get-NetAdapter | Set-NetAdapterAdvancedProperty -RegistryKeyword "*RSS" -RegistryValue 1 -ErrorAction SilentlyContinue', errorAction: Ignore}
+  - !powerShell: {command: 'Get-NetAdapter | Set-NetAdapterAdvancedProperty -RegistryKeyword "*NumRssQueues" -RegistryValue 2 -ErrorAction SilentlyContinue', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters', value: 'Tcp1323Opts', type: REG_DWORD, data: '3', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters', value: 'TcpMaxDupAcks', type: REG_DWORD, data: '2', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters', value: 'SackOpts', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters', value: 'TcpTimedWaitDelay', type: REG_DWORD, data: '30', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters', value: 'MaxUserPort', type: REG_DWORD, data: '65534', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters', value: 'TcpNumConnections', type: REG_DWORD, data: '16777214', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters', value: 'EnablePMTUDiscovery', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters', value: 'EnablePMTUBHDetect', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters', value: 'EnableDca', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters', value: 'EnableTCPA', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters', value: 'EnableWsd', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\NetBT\Parameters', value: 'NodeType', type: REG_DWORD, data: '2', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient', value: 'EnableMulticast', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters', value: 'IRPStackSize', type: REG_DWORD, data: '32', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters', value: 'SizReqBuf', type: REG_DWORD, data: '16384', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters', value: 'Size', type: REG_DWORD, data: '3', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\QoS\WoL', value: 'Policy', type: REG_SZ, data: '270', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\mrxsmb\Parameters', value: 'DisableBandwidthThrottling', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\afdx\Parameters', value: '*RSSQueueCount', type: REG_DWORD, data: '4', errorAction: Ignore}
+  - !run: {exe: 'netsh', args: 'int tcp set global chimney=disabled', errorAction: Ignore}
+  - !run: {exe: 'netsh', args: 'int tcp set global dca=enabled', errorAction: Ignore}
+  - !run: {exe: 'netsh', args: 'int tcp set global netdma=enabled', errorAction: Ignore}
+  - !run: {exe: 'netsh', args: 'int tcp set global timestamps=disabled', errorAction: Ignore}
+  - !run: {exe: 'netsh', args: 'int tcp set global rss=enabled', errorAction: Ignore}
+  - !run: {exe: 'netsh', args: 'int tcp set supplemental template=Internet congestionprovider=ctcp', errorAction: Ignore}
+  - !run: {exe: 'netsh', args: 'int tcp set supplemental template=InternetCustom congestionprovider=ctcp', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # ANIMATIONS / VISUAL EFFECTS
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'UserPreferencesMask', type: REG_BINARY, data: '9012038010000000', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Control Panel\Desktop\WindowMetrics', value: 'MinAnimate', type: REG_SZ, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'ListviewShadow', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\DWM', value: 'EnableAeroPeek', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\DWM', value: 'AlwaysHibernateThumbnails', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'DragFullWindows', type: REG_SZ, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'FontSmoothing', type: REG_SZ, data: '2', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAnimations', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'IconsOnly', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'MenuShowDelay', type: REG_SZ, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'LowLevelHooksTimeout', type: REG_DWORD, data: '1000', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'WaitToKillAppTimeout', type: REG_SZ, data: '2000', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control', value: 'WaitToKillServiceTimeout', type: REG_SZ, data: '2000', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'HungAppTimeout', type: REG_SZ, data: '1000', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'AutoEndTasks', type: REG_SZ, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\ContentIndex', value: 'StartupDelay', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Serialize', value: 'StartupDelayInMSec', type: REG_DWORD, data: '0', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # MOUSE / KEYBOARD
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKCU\Control Panel\Mouse', value: 'MouseSpeed', type: REG_SZ, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Control Panel\Mouse', value: 'MouseThreshold1', type: REG_SZ, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Control Panel\Mouse', value: 'MouseThreshold2', type: REG_SZ, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Control Panel\Mouse', value: 'DoubleClickSpeed', type: REG_SZ, data: '400', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Control Panel\Mouse', value: 'MouseHoverTime', type: REG_SZ, data: '10', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Control Panel\Keyboard', value: 'KeyboardDelay', type: REG_SZ, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\Control Panel\Keyboard', value: 'KeyboardSpeed', type: REG_SZ, data: '31', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\mouclass\Parameters', value: 'MouseDataQueueSize', type: REG_DWORD, data: '16', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters', value: 'KeyboardDataQueueSize', type: REG_DWORD, data: '16', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # GPU / DISPLAY
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile', value: 'GPUThrottling', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000', value: 'RMHdcpKeyglobZero', type: REG_DWORD, data: '1', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # BCD (Boot Configuration Data)
+  # ═══════════════════════════════════════════════════════════
+  - !run: {exe: 'bcdedit', args: '/set disabledynamictick yes', errorAction: Ignore}
+  - !run: {exe: 'bcdedit', args: '/deletevalue useplatformclock', errorAction: Ignore}
+  - !run: {exe: 'bcdedit', args: '/set {current} nx optin', errorAction: Ignore}
+  - !run: {exe: 'bcdedit', args: '/set {current} recoveryenabled no', errorAction: Ignore}
+  - !run: {exe: 'bcdedit', args: '/set {current} disableelamdrivers yes', errorAction: Ignore}
+  - !run: {exe: 'bcdedit', args: '/set bootmenupolicy Legacy', errorAction: Ignore}
+  # VBS / hypervisor off — frees ~1-3GB RAM, zero BSOD risk
+  - !run: {exe: 'bcdedit', args: '/set {current} hypervisorlaunchtype off', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # DEVICE GUARD / VBS
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard', value: 'EnableVirtualizationBasedSecurity', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard', value: 'HyperVVirtualizationBasedSecurityOptout', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard', value: 'RequirePlatformSecurityFeatures', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\CredentialGuard', value: 'Enabled', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\SystemGuard', value: 'Enabled', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Lsa', value: 'LsaCfgFlags', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard', value: 'EnableVirtualizationBasedSecurity', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity', value: 'Enabled', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard\Scenarios\CredentialGuard', value: 'Enabled', type: REG_DWORD, data: '0', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # SESSION MANAGER
+  # ═══════════════════════════════════════════════════════════
+  # Process mitigations: disable all system-wide (Atlas/FSOS/Sapphire/vain13 method)
+  - !powerShell:
+    command: >-
+      Set-ProcessMitigation -System -Disable
+      CFG,SEHOP,ForceRelocateImages,BottomUp,HighEntropy,StrictHandle,
+      SuppressExports,DisableExtensionPoints,BlockDynamicCode,
+      BlockRemoteImageLoads -ErrorAction SilentlyContinue
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel', value: 'DisableExceptionChainValidation', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel', value: 'DisableControlFlowGuardXfg', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel', value: 'DisableControlFlowGuardExportSuppression', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel', value: 'SerializeTimerExpiration', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel', value: 'DriveRemappingMitigation', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks', value: 'Enabled', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\SCMConfig', value: 'EnableSvchostMitigationsPolicy', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsMitigation', value: 'UserPreference', type: REG_DWORD, data: '1', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Configuration Manager', value: 'SelfHealingEnabled', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Configuration Manager', value: 'VirtualizationEnabled', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Configuration Manager', value: 'FastBoot', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power', value: 'PowerSettingProfile', type: REG_DWORD, data: '0', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # GAME DVR / GAME CONFIG (owned by 11-networking.yml)
+  # ═══════════════════════════════════════════════════════════
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\GameBar', value: 'UseNexusForGameBarEnabled', type: REG_DWORD, data: '0', errorAction: Ignore}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\GameBar', value: 'AutoGameModeEnabled', type: REG_DWORD, data: '1', errorAction: Ignore}

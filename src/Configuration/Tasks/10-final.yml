@@ -1,0 +1,97 @@
+---
+title: Final
+description: Final cleanup - OneDrive, WinRE, paging, reserved storage, disk cleanup, WinSxS, taskbar
+privilege: TrustedInstaller
+actions:
+
+  - !status: {status: 'Running aggressive cleanup...'}
+
+  # ═══════════════════════════════════════════════════════════
+  # MASTER CLEANUP — OneDrive, Edge, WinRE, Paging, Reserved Storage, Disk, WinSxS
+  # ═══════════════════════════════════════════════════════════
+  - !run:
+    exeDir: true
+    exe: 'NSudoLC.exe'
+    args: '-U:T -P:E -M:S -Priority:RealTime -UseCurrentConsole -Wait PowerShell.exe -NoProfile -ExecutionPolicy Bypass -File CLEANUP.ps1'
+    wait: true
+    errorAction: Ignore
+
+  # ═══════════════════════════════════════════════════════════
+  # FULL WINSXS CLEANUP (only when LZX compression chosen)
+  # ═══════════════════════════════════════════════════════════
+  - !status: {status: 'Running full WinSxS cleanup...', option: lzx-apply}
+  - !run:
+    exeDir: true
+    exe: 'NSudoLC.exe'
+    args: '-U:T -P:E -M:S -Priority:RealTime -UseCurrentConsole -Wait PowerShell.exe -NoProfile -ExecutionPolicy Bypass -File CLEANUP.ps1 -FullWinSxS'
+    wait: true
+    errorAction: Ignore
+    option: lzx-apply
+
+  # ═══════════════════════════════════════════════════════════
+  # DISK CLEANUP — ADDITIONAL TEMP FILES, LOGS, CACHE
+  # ═══════════════════════════════════════════════════════════
+  - !status: {status: 'Cleaning disk space...'}
+  - !cmd:
+    command: 'del /q /f /s "%TEMP%\*" 2>nul & del /q /f /s "%WINDIR%\Temp\*" 2>nul & del /q /f /s "%WINDIR%\Prefetch\*" 2>nul & del /q /f /s "%WINDIR%\Logs\*.log" 2>nul & del /q /f /s "%LOCALAPPDATA%\Microsoft\Windows\INetCache\*" 2>nul & del /q /f /s "%LOCALAPPDATA%\Microsoft\Windows\Temporary Internet Files\*" 2>nul & del /q /f /s "%WINDIR%\Minidump\*" 2>nul & del /q /f /s "%WINDIR%\MEMORY.DMP" 2>nul & del /q /f /s "%LOCALAPPDATA%\CrashDumps\*" 2>nul'
+    errorAction: Ignore
+
+  # ═══════════════════════════════════════════════════════════
+  # DISABLE SCHEDULED TASKS
+  # ═══════════════════════════════════════════════════════════
+  - !status: {status: 'Disabling scheduled tasks...'}
+  - !cmd:
+    command: 'schtasks /Change /TN "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /Disable 2>nul & schtasks /Change /TN "\Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents" /Disable 2>nul & schtasks /Change /TN "\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" /Disable 2>nul & schtasks /Change /TN "\Microsoft\Windows\WindowsUpdate\Scheduled Start" /Disable 2>nul & schtasks /Change /TN "\Microsoft\Windows\Windows Error Reporting\QueueReporting" /Disable 2>nul & schtasks /Change /TN "\Microsoft\Windows\Application Experience\AitAgent" /Disable 2>nul & schtasks /Change /TN "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /Disable 2>nul & schtasks /Change /TN "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable 2>nul & schtasks /Change /TN "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /Disable 2>nul & schtasks /Change /TN "\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /Disable 2>nul & schtasks /Change /TN "\Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask" /Disable 2>nul & schtasks /Change /TN "\Microsoft\Windows\UpdateOrchestrator\StartOobeAppsScanAfterUpdate" /Disable 2>nul & schtasks /Change /TN "\Microsoft\Windows\UpdateOrchestrator\Start Oobe Expedite Work" /Disable 2>nul & schtasks /Change /TN "\Microsoft\Windows\UpdateOrchestrator\Schedule Scan" /Disable 2>nul'
+    errorAction: Ignore
+
+  # Bulk disable remaining tasks via PowerShell (wildcard)
+  - !powerShell:
+    command: 'Get-ScheduledTask | Where-Object { $_.TaskPath -match ''\\Microsoft\\Windows\\Application Experience\\'' -or $_.TaskPath -match ''\\Microsoft\\Windows\\Autochk\\'' -or $_.TaskPath -match ''\\Microsoft\\Windows\\CloudExperienceHost\\'' -or $_.TaskPath -match ''\\Microsoft\\Windows\\Customer Experience Improvement Program\\'' -or $_.TaskPath -match ''\\Microsoft\\Windows\\DiskDiagnostic\\'' -or $_.TaskPath -match ''\\Microsoft\\Windows\\Feedback\\'' -or $_.TaskPath -match ''\\Microsoft\\Windows\\Maps\\'' -or $_.TaskPath -match ''\\Microsoft\\Windows\\Office\\'' -or $_.TaskPath -match ''\\Microsoft\\Windows\\PI\\'' -or $_.TaskPath -match ''\\Microsoft\\Windows\\Power Efficiency Diagnostics\\'' -or $_.TaskPath -match ''\\Microsoft\\Windows\\Windows Error Reporting\\'' -or $_.TaskPath -match ''\\Microsoft\\Windows\\WindowsUpdate\\'' -or $_.TaskPath -match ''\\Microsoft\\XblGameSave\\'' } | Disable-ScheduledTask -ErrorAction SilentlyContinue'
+    runas: currentUserElevated
+    errorAction: Ignore
+
+  # ═══════════════════════════════════════════════════════════
+  # TELEMETRY OPT-OUT ENVIRONMENT VARIABLES
+  # ═══════════════════════════════════════════════════════════
+  - !cmd: {command: 'setx DOTNET_CLI_TELEMETRY_OPTOUT 1', errorAction: Ignore}
+  - !cmd: {command: 'setx POWERSHELL_TELEMETRY_OPTOUT 1', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # FORCE GROUP POLICY UPDATE
+  # ═══════════════════════════════════════════════════════════
+  - !run: {exe: 'gpupdate.exe', wait: true, errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # LZX COMPRESSION (gated — only if user chose lzx-apply)
+  # ═══════════════════════════════════════════════════════════
+  - !status: {status: 'Applying LZX compression...', option: lzx-apply}
+  - !cmd: {command: 'compact.exe /CompactOS:always', errorAction: Ignore, option: lzx-apply}
+  - !cmd: {command: 'compact.exe /C /S:"C:\Windows" /I /Q /EXE:LZX', errorAction: Ignore, option: lzx-apply}
+
+  # ═══════════════════════════════════════════════════════════
+  # OEM INFO
+  # ═══════════════════════════════════════════════════════════
+  - !status: {status: 'Setting OEM information...'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation', value: 'Manufacturer', type: REG_SZ, data: 'Project Atom', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation', value: 'Model', type: REG_SZ, data: '', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation', value: 'SupportURL', type: REG_SZ, data: '', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion', value: 'RegisteredOwner', type: REG_SZ, data: 'Project Atom', errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion', value: 'RegisteredOrganization', type: REG_SZ, data: '', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # SET C: DRIVE LABEL
+  # ═══════════════════════════════════════════════════════════
+  - !status: {status: 'Setting C: drive label to Project Atom...'}
+  - !run: {exe: 'label', args: 'C: "Project Atom"', errorAction: Ignore}
+
+  # ═══════════════════════════════════════════════════════════
+  # RESTART EXPLORER
+  # ═══════════════════════════════════════════════════════════
+  - !status: {status: 'Done. Restarting Explorer...'}
+  - !powerShell:
+    command: |
+      Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue
+      Start-Sleep -Seconds 2
+      Start-Process explorer
+    runas: currentUserElevated
+    errorAction: Ignore
