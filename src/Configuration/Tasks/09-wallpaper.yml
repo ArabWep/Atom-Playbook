@@ -1,4 +1,4 @@
----
+﻿---
 title: Wallpaper
 description: Privacy+ wallpaper + start menu cleanup (exact WALLPAPER.bat replication)
 privilege: TrustedInstaller
@@ -6,18 +6,14 @@ actions:
 
   - !status: {status: 'Applying wallpaper (Privacy+ method)...'}
 
-  # ═══════════════════════════════════════════════════════════
   # RESET AERO.THEME PERMISSIONS
-  # ═══════════════════════════════════════════════════════════
   - !run:
     exeDir: true
     exe: 'NSudoLC.exe'
     args: '-U:T -P:E -M:S -Priority:RealTime -UseCurrentConsole -Wait icacls.exe "%WINDIR%\Resources\Themes\aero.theme" /reset /t'
     errorAction: Ignore
 
-  # ═══════════════════════════════════════════════════════════
   # APPLY WALLPAPER + START MENU CLEANUP (single script)
-  # ═══════════════════════════════════════════════════════════
   - !run:
     exeDir: true
     exe: 'PowerShell.exe'
@@ -26,9 +22,7 @@ actions:
     runas: currentUserElevated
     errorAction: Ignore
 
-  # ═══════════════════════════════════════════════════════════
   # DISABLE SPOTLIGHT (registry, separate for reliability)
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKCU\SOFTWARE\Policies\Microsoft\Windows\CloudContent', value: 'DisableSpotlightCollectionOnDesktop', type: REG_DWORD, data: 1, errorAction: Ignore}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'RotatingLockScreenEnabled', type: REG_DWORD, data: 0, errorAction: Ignore}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'RotatingLockScreenOverlayEnabled', type: REG_DWORD, data: 0, errorAction: Ignore}

@@ -1,4 +1,4 @@
----
+﻿---
 title: Services
 description: Disable unnecessary user-mode services
 privilege: TrustedInstaller
@@ -6,9 +6,7 @@ actions:
 
   - !status: {status: 'Disabling services...'}
 
-  # ═══════════════════════════════════════════════════════════
   # TELEMETRY / DIAGNOSTICS
-  # ═══════════════════════════════════════════════════════════
   - !service: {name: 'DiagTrack', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'dmwappushservice', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'diagnosticshub.standardcollector.service', operation: change, startup: 4, errorAction: Ignore}
@@ -25,9 +23,7 @@ actions:
   - !service: {name: 'DPS', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'TroubleshootingSvc', operation: change, startup: 4, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # CLOUD / SYNC / PUSH
-  # ═══════════════════════════════════════════════════════════
   - !service: {name: 'OneSyncSvc', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'WpnService', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'WpnUserService', operation: change, startup: 4, errorAction: Ignore}
@@ -38,23 +34,17 @@ actions:
   - !service: {name: 'CloudBackupRestoreSvc', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'cbdhsvc', operation: change, startup: 4, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # XBOX / GAMING
-  # ═══════════════════════════════════════════════════════════
   - !service: {name: 'XblAuthManager', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'XblGameSave', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'XboxGipSvc', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'XboxNetApiSvc', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'BcastDVRUserService', operation: change, startup: 4, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # SEARCH / INDEXING
-  # ═══════════════════════════════════════════════════════════
   - !service: {name: 'WSearch', operation: change, startup: 4, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # SYSTEM / MISC
-  # ═══════════════════════════════════════════════════════════
   - !service: {name: 'SysMain', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'Themes', operation: change, startup: 3, errorAction: Ignore}
   - !service: {name: 'TrkWks', operation: change, startup: 4, errorAction: Ignore}
@@ -94,9 +84,7 @@ actions:
   - !service: {name: 'WarpJITSvc', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'McpManagementService', operation: change, startup: 4, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # PRINTING / SCANNING (ALL)
-  # ═══════════════════════════════════════════════════════════
   - !service: {name: 'Spooler', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'printworkflowusersvc', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'stisvc', operation: change, startup: 4, errorAction: Ignore}
@@ -107,9 +95,7 @@ actions:
   - !service: {name: 'LPTEnum', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'Parallel', operation: change, startup: 4, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # BLUETOOTH (ALL - every single one)
-  # ═══════════════════════════════════════════════════════════
   - !service: {name: 'BluetoothUserService', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'BthAvctpSvc', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'BthEnum', operation: change, startup: 4, errorAction: Ignore}
@@ -126,9 +112,7 @@ actions:
   - !service: {name: 'BthRadUsb', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'Microsoft_Bluetooth_AvctpTransport', operation: change, startup: 4, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # NETWORK (user-mode only)
-  # ═══════════════════════════════════════════════════════════
   - !service: {name: 'SSDPSRV', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'SmsRouter', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'IpxlatCfgSvc', operation: change, startup: 4, errorAction: Ignore}
@@ -141,25 +125,19 @@ actions:
   - !service: {name: 'lmhosts', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'NdisWan', operation: change, startup: 3, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # PHONES / TELEPHONY
-  # ═══════════════════════════════════════════════════════════
   - !service: {name: 'PhoneSvc', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'TapiSrv', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'lfsvc', operation: change, startup: 4, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # SMART CARD
-  # ═══════════════════════════════════════════════════════════
   - !service: {name: 'SCardSvr', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'ScDeviceEnum', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'SCPolicySvc', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'scfilter', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'SEMgrSvc', operation: change, startup: 4, errorAction: Ignore}
-
-  # ═══════════════════════════════════════════════════════════
+  
   # OTHER
-  # ═══════════════════════════════════════════════════════════
   - !service: {name: 'AppVClient', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'AJRouter', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'AppIDSvc', operation: change, startup: 3, errorAction: Ignore}
@@ -197,9 +175,7 @@ actions:
   - !service: {name: 'AarSvc', operation: change, startup: 4, errorAction: Ignore}
   - !service: {name: 'cloudidsvc', operation: change, startup: 4, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # UAC (optional — disables UAC prompts)
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableLUA', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'ConsentPromptBehaviorAdmin', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'PromptOnSecureDesktop', type: REG_DWORD, data: '0', errorAction: Ignore}

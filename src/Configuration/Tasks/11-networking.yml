@@ -1,4 +1,4 @@
----
+﻿---
 title: Networking & System
 description: Network optimization, system behavior, security, gaming tweaks
 privilege: TrustedInstaller
@@ -6,9 +6,7 @@ actions:
 
   - !status: {status: 'Optimizing networking & system...'}
 
-  # ═══════════════════════════════════════════════════════════
   # NETWORK OPTIMIZATION
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters', value: 'Tcp1323Opts', type: REG_DWORD, data: '3', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters', value: 'DefaultTTL', type: REG_DWORD, data: '128', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters', value: 'TcpMaxDupAcks', type: REG_DWORD, data: '2', errorAction: Ignore}
@@ -52,18 +50,14 @@ actions:
   - !run: {exe: 'netsh', args: 'int tcp set supplemental template=Internet congestionprovider=ctcp', errorAction: Ignore}
   - !run: {exe: 'netsh', args: 'int tcp set supplemental template=InternetCustom congestionprovider=ctcp', errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # SMB / FILE SHARING
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters', value: 'DisableSMB1', type: REG_DWORD, data: '1', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters', value: 'DisableSMBPerf', type: REG_DWORD, data: '1', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters', value: 'EnableStrictVerify', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters', value: 'AutoShareServer', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters', value: 'AutoShareWks', type: REG_DWORD, data: '0', errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # SYSTEM BEHAVIOR
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control', value: 'WaitToKillServiceTimeout', type: REG_SZ, data: '2000', errorAction: Ignore}
   - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'WaitToKillAppTimeout', type: REG_SZ, data: '2000', errorAction: Ignore}
   - !registryValue: {path: 'HKCU\Control Panel\Desktop', value: 'HungAppTimeout', type: REG_SZ, data: '1000', errorAction: Ignore}
@@ -79,9 +73,7 @@ actions:
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon', value: 'PowerdownAfterShutdown', type: REG_SZ, data: '1', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'ShutdownWithoutLogon', type: REG_DWORD, data: '1', errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # SECURITY (Aggressive - for gaming, no security concern)
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableLUA', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'ConsentPromptBehaviorAdmin', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'PromptOnSecureDesktop', type: REG_DWORD, data: '0', errorAction: Ignore}
@@ -91,9 +83,7 @@ actions:
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'FilterAdministratorToken', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableUIADesktopToggle', type: REG_DWORD, data: '0', errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # EXPLORER / FILE MANAGEMENT
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'HideFileExt', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'Hidden', type: REG_DWORD, data: '1', errorAction: Ignore}
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'LaunchTO', type: REG_DWORD, data: '1', errorAction: Ignore}
@@ -117,9 +107,7 @@ actions:
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CabinetState', value: 'FullPath', type: REG_DWORD, data: '1', errorAction: Ignore}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CabinetState', value: 'FullPathAddress', type: REG_DWORD, data: '1', errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # GAMING / GAME DVR (Expanded)
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKCU\System\GameConfigStore', value: 'GameDVR_FSEBehaviorMode', type: REG_DWORD, data: '2', errorAction: Ignore}
   - !registryValue: {path: 'HKCU\System\GameConfigStore', value: 'GameDVR_HonorUserFSEBehaviorMode', type: REG_DWORD, data: '1', errorAction: Ignore}
   - !registryValue: {path: 'HKCU\System\GameConfigStore', value: 'GameDVR_FSEBehavior', type: REG_DWORD, data: '2', errorAction: Ignore}
@@ -139,9 +127,7 @@ actions:
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR', value: 'EnableGameDVR', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassIdWindows.GamingGameBarInputService', value: 'TrustLevel', type: REG_DWORD, data: '0', errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # POWER / BATTERY
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Power', value: 'HibernateEnabledDefault', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Power', value: 'HiberbootEnabled', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Power', value: 'EnergyEstimationEnabled', type: REG_DWORD, data: '0', errorAction: Ignore}
@@ -159,18 +145,14 @@ actions:
   - !run: {exe: 'powercfg', args: '/setacvalueindex SCHEME_CURRENT SUB_BUTTONS LIDACTION 0', errorAction: Ignore}
   - !run: {exe: 'powercfg', args: '/setactive SCHEME_CURRENT', errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # STORAGE / IO
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\stornvme\Parameters\Device', value: 'IdlePowerMode', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\stornvme\Parameters\Device', value: 'DisableDSTThrottle', type: REG_DWORD, data: '1', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Storage', value: 'StorageD3InModernStandby', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\spaceport\Parameters', value: 'IoLatencyCap', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\rdyboost\Parameters', value: 'StopPolling', type: REG_DWORD, data: '1', errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # NOTIFICATIONS / TOASTS
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications', value: 'ToastEnabled', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications', value: 'NoCloudApplicationNotification', type: REG_DWORD, data: '1', errorAction: Ignore}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings', value: 'NOC_GLOBAL_SETTING_ALLOW_NOTIFICATION_SOUND', type: REG_DWORD, data: '0', errorAction: Ignore}
@@ -178,15 +160,11 @@ actions:
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings', value: 'NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'ShowSyncProviderNotifications', type: REG_DWORD, data: '0', errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # DARK MODE / PERSONALIZATION
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'AppsUseLightTheme', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'SystemUsesLightTheme', type: REG_DWORD, data: '0', errorAction: Ignore}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'TransparencyEffects', type: REG_DWORD, data: '0', errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # CONTEXT MENU (Windows 11 classic)
-  # ═══════════════════════════════════════════════════════════
   - !registryKey: {path: 'HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32', operation: add, errorAction: Ignore}
   - !registryValue: {path: 'HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32', value: '(Default)', type: REG_SZ, data: '', errorAction: Ignore}

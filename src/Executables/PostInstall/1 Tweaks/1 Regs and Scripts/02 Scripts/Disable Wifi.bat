@@ -1,1 +1,0 @@
-sc config WlanSvc start=enabled

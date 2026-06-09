@@ -1,4 +1,4 @@
----
+﻿---
 title: AppX
 description: Remove unnecessary AppX packages
 privilege: TrustedInstaller
@@ -160,9 +160,7 @@ actions:
   - !appx: {name: '*MicrosoftWindows.Client.CoreAI*', type: app, errorAction: Ignore}
   - !appx: {name: '*DesktopStickerEditorCentennial*', type: app, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # BLOCK REINSTALL - Deprovisioned keys
-  # ═══════════════════════════════════════════════════════════
   - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.OneDrive_8wekyb3d8bbwe', operation: add, errorAction: Ignore}
   - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\microsoft.microsoftskydrive_8wekyb3d8bbwe', operation: add, errorAction: Ignore}
   - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.SkyDrive_8wekyb3d8bbwe', operation: add, errorAction: Ignore}

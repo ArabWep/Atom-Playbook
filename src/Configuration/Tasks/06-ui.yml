@@ -1,4 +1,4 @@
----
+﻿---
 title: UI
 description: Clean up Windows UI, taskbar icons, explorer, dark mode, context menu
 privilege: TrustedInstaller
@@ -6,9 +6,7 @@ actions:
 
   - !status: {status: 'Cleaning up UI and taskbar...'}
 
-  # ═══════════════════════════════════════════════════════════
   # TASKBAR — REMOVE ALL ICONS
-  # ═══════════════════════════════════════════════════════════
   # Search box: hide (0=no icon, 1=search icon, 2=search bar)
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search', value: 'SearchboxTaskbarMode', type: REG_DWORD, data: 0, errorAction: Ignore}
   # Task View button: hidden
@@ -42,9 +40,7 @@ actions:
   # Block WebExperience reinstall
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Dsh', value: 'AllowNewsAndInterests', type: REG_DWORD, data: 0, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # CLEAR TASKBAR PINNED ITEMS + JUMP LISTS
-  # ═══════════════════════════════════════════════════════════
   - !powerShell:
     command: |
       # Clear Taskband registry (pinned taskbar items)
@@ -69,9 +65,7 @@ actions:
     runas: currentUserElevated
     errorAction: Ignore
 
-  # ═══════════════════════════════════════════════════════════
   # EXPLORER
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer', value: 'ShowFrequent', type: REG_DWORD, data: 0, errorAction: Ignore}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer', value: 'EnableAutoTray', type: REG_DWORD, data: 1, errorAction: Ignore}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'EnableBalloonTips', type: REG_DWORD, data: 0, errorAction: Ignore}
@@ -85,52 +79,38 @@ actions:
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CabinetState', value: 'FullPathAddress', type: REG_DWORD, data: 1, errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer', value: 'Max Cached Icons', type: REG_SZ, data: '4096', errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # NOTIFICATIONS
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications', value: 'ToastEnabled', type: REG_DWORD, data: 0, errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications', value: 'NoCloudApplicationNotification', type: REG_DWORD, data: 1, errorAction: Ignore}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings', value: 'NOC_GLOBAL_SETTING_ALLOW_NOTIFICATION_SOUND', type: REG_DWORD, data: 0, errorAction: Ignore}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings', value: 'NOC_GLOBAL_SETTING_ALLOW_CRITICAL_TOASTS_ABOVE_LOCK', type: REG_DWORD, data: 0, errorAction: Ignore}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings', value: 'NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK', type: REG_DWORD, data: 0, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # DARK MODE
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'AppsUseLightTheme', type: REG_DWORD, data: 0, errorAction: Ignore}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'SystemUsesLightTheme', type: REG_DWORD, data: 0, errorAction: Ignore}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'TransparencyEffects', type: REG_DWORD, data: 0, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # CONTEXT MENU (Windows 11 classic)
-  # ═══════════════════════════════════════════════════════════
   - !registryKey: {path: 'HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32', operation: add, errorAction: Ignore}
   - !registryValue: {path: 'HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32', value: '(Default)', type: REG_SZ, data: '', errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # HIDE DESKTOP ICONS
-  # ═══════════════════════════════════════════════════════════
   # Hide Recycle Bin from desktop
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel', value: '{645FF040-5081-101B-9F08-00AA002F954E}', type: REG_DWORD, data: 1, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # SHOW FILE EXTENSIONS / HIDDEN FILES
-  # ═══════════════════════════════════════════════════════════
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'Hidden', type: REG_DWORD, data: 1, errorAction: Ignore}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'HideFileExt', type: REG_DWORD, data: 0, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # RESTART EXPLORER TO APPLY TASKBAR CHANGES
-  # ═══════════════════════════════════════════════════════════
   - !taskKill: {name: 'explorer', errorAction: Ignore}
   - !powerShell:
     command: 'Start-Process explorer.exe'
     runas: currentUserElevated
     errorAction: Ignore
 
-  # ═══════════════════════════════════════════════════════════
   # Clean up Start Menu folders (PowerShell for reliable env var expansion)
-  # ═══════════════════════════════════════════════════════════
   - !powerShell:
     command: >-
       $folders = @(

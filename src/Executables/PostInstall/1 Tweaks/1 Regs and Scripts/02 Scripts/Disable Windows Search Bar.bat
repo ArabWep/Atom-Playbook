@@ -1,1 +1,0 @@
-sc config wsearch start=disabled

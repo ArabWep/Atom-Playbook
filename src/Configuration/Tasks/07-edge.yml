@@ -1,4 +1,4 @@
----
+﻿---
 title: Edge
 description: Fully remove Microsoft Edge - services, AppX, files, registry, scheduled tasks, WebView
 privilege: TrustedInstaller
@@ -7,26 +7,20 @@ actions:
 
   - !status: {status: 'Removing Microsoft Edge...'}
 
-  # ═══════════════════════════════════════════════════════════
   # KILL ALL EDGE PROCESSES
-  # ═══════════════════════════════════════════════════════════
   - !taskKill: {name: 'msedge', errorAction: Ignore}
   - !taskKill: {name: 'msedgewebview2', errorAction: Ignore}
   - !taskKill: {name: 'MicrosoftEdge*', errorAction: Ignore}
   - !taskKill: {name: 'MicrosoftEdgeUpdate', errorAction: Ignore}
   - !taskKill: {name: 'MicrosoftEdgeElevationService', errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # DELETE EDGE SERVICES
-  # ═══════════════════════════════════════════════════════════
   - !service: {name: 'edgeupdate', operation: delete, errorAction: Ignore}
   - !service: {name: 'edgeupdatem', operation: delete, errorAction: Ignore}
   - !service: {name: 'MicrosoftEdgeElevationService', operation: delete, errorAction: Ignore}
   - !service: {name: 'MicrosoftEdgeUpdateService', operation: delete, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # UNINSTALL EDGE VIA SETUP.EXE (hidden window + kill spawned browser)
-  # ═══════════════════════════════════════════════════════════
   - !powerShell:
     command: >-
       $edgeUpdate = "${env:ProgramFiles(x86)}\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe";
@@ -37,9 +31,7 @@ actions:
       Get-Process -Name 'msedge','MicrosoftEdgeUpdate' -ErrorAction SilentlyContinue | Stop-Process -Force
     errorAction: Ignore
 
-  # ═══════════════════════════════════════════════════════════
   # REMOVE EDGE APPX PACKAGES
-  # ═══════════════════════════════════════════════════════════
   - !appx: {name: 'Microsoft.MicrosoftEdge.Stable*', type: family, errorAction: Ignore}
   - !appx: {name: 'Microsoft.MicrosoftEdgeDevToolsClient*', type: family, errorAction: Ignore}
   - !appx: {name: 'Microsoft.Edge*', type: family, errorAction: Ignore}
@@ -48,9 +40,7 @@ actions:
   - !appx: {name: 'Microsoft.MicrosoftEdge.Canary*', type: family, errorAction: Ignore}
   - !appx: {name: 'Microsoft.MicrosoftEdgeDev*', type: family, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # REMOVE EDGE FILES - ALL LOCATIONS
-  # ═══════════════════════════════════════════════════════════
   - !powerShell:
     command: >-
       $paths = @(
@@ -82,9 +72,7 @@ actions:
       }
     errorAction: Ignore
 
-  # ═══════════════════════════════════════════════════════════
   # REMOVE EDGE REGISTRY
-  # ═══════════════════════════════════════════════════════════
   - !registryKey: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge', operation: delete, errorAction: Ignore}
   - !registryKey: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update', operation: delete, errorAction: Ignore}
   - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Edge', operation: delete, errorAction: Ignore}
@@ -109,9 +97,7 @@ actions:
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\AppExecutionAlias\msedgecanary', value: 'AppExecutionAlias', data: '', operation: delete, errorAction: Ignore}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\AppExecutionAlias\msedgewebview', value: 'AppExecutionAlias', data: '', operation: delete, errorAction: Ignore}
 
-  # ═══════════════════════════════════════════════════════════
   # REMOVE EDGE SCHEDULED TASKS
-  # ═══════════════════════════════════════════════════════════
   - !cmd:
     command: 'schtasks /Delete /TN "\Microsoft\EdgeUpdate\*" /F 2>nul'
     errorAction: Ignore
@@ -120,9 +106,7 @@ actions:
     runas: currentUserElevated
     errorAction: Ignore
 
-  # ═══════════════════════════════════════════════════════════
   # REMOVE EDGE WEBVIEW2 (hidden window + kill spawned browser)
-  # ═══════════════════════════════════════════════════════════
   - !powerShell:
     command: >-
       $wv2 = "${env:ProgramFiles(x86)}\Microsoft\EdgeWebView\Installer\MicrosoftEdgeWebView2RuntimeInstaller.exe";
@@ -133,9 +117,7 @@ actions:
       Get-Process -Name 'msedgewebview2' -ErrorAction SilentlyContinue | Stop-Process -Force
     errorAction: Ignore
 
-  # ═══════════════════════════════════════════════════════════
   # BLOCK EDGE PROTOCOL HANDLERS
-  # ═══════════════════════════════════════════════════════════
   - !registryKey: {path: 'HKLM\SOFTWARE\Classes\microsoft-edge', operation: delete, errorAction: Ignore}
   - !registryKey: {path: 'HKLM\SOFTWARE\Classes\MSEdgeHTM', operation: delete, errorAction: Ignore}
   - !registryKey: {path: 'HKCR\microsoft-edge', operation: delete, errorAction: Ignore}

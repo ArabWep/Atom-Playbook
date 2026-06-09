@@ -1,1 +1,0 @@
-@echo offwmic computersystem where name="%computername%" set AutomaticManagedPagefile=False >nul 2>&1wmic pagefileset create name="C:\\pagefile.sys" >nul 2>&1wmic pagefileset where name="C:\\pagefile.sys" set InitialSize=4096,MaximumSize=16384 >nul 2>&1shutdown /r /t 0
